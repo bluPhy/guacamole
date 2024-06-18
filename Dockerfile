@@ -210,14 +210,14 @@ RUN apk add --no-cache                \
         ghostscript                   \
         netcat-openbsd                \
         openjdk11-jdk                 \
-        postgresql13                  \
+        postgresql15                  \
         shadow                        \
         terminus-font                 \
         ttf-dejavu                    \
         ttf-liberation                \
         tzdata                        \
         util-linux-login && \
-    xargs apk add --no-cache < ${PREFIX_DIR}/DEPENDENCIES
+    xargs -t apk add --no-cache < ${PREFIX_DIR}/DEPENDENCIES
 
 RUN apk add --no-cache -X https://dl-cdn.alpinelinux.org/alpine/edge/testing gosu 
 
@@ -240,7 +240,7 @@ chmod 777 -R /opt/tomcat/logs/
 RUN set -x \
   && rm -rf ${CATALINA_HOME}/webapps/ROOT \
   && curl -SLo ${CATALINA_HOME}/webapps/ROOT.war "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${GUAC_VER}.war" \
-  && curl -SLo ${GUACAMOLE_HOME}/lib/postgresql-42.6.0.jar "https://jdbc.postgresql.org/download/postgresql-42.6.0.jar" \
+  && curl -SLo ${GUACAMOLE_HOME}/lib/postgresql-42.6.1.jar "https://jdbc.postgresql.org/download/postgresql-42.6.1.jar" \
   && curl -SLo ${GUACAMOLE_HOME}/guacamole-auth-jdbc-${GUAC_VER}.tar.gz "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-auth-jdbc-${GUAC_VER}.tar.gz" \
   && tar -xzf ${GUACAMOLE_HOME}/guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
   && cp -R ${GUACAMOLE_HOME}/guacamole-auth-jdbc-${GUAC_VER}/postgresql/guacamole-auth-jdbc-postgresql-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions/ \
