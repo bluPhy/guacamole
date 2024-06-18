@@ -1,7 +1,7 @@
 ARG ALPINE_BASE_IMAGE=latest
 FROM alpine:${ALPINE_BASE_IMAGE} AS builder
 
-ARG VERSION="1.5.4"
+ARG VERSION="1.5.5"
 ARG TARGETPLATFORM
 
 ENV \
@@ -157,11 +157,11 @@ FROM alpine:${ALPINE_BASE_IMAGE}
 ARG PREFIX_DIR=/opt/guacamole
 
 ARG APPLICATION="guacamole"
-ARG BUILD_RFC3339="2023-04-04T13:00:00Z"
+ARG BUILD_RFC3339="2024-06-18"
 ARG REVISION="local"
 ARG DESCRIPTION="Fully Packaged and Multi-Arch Guacamole container"
-ARG PACKAGE="flcontainers/guacamole"
-ARG VERSION="1.5.4"
+ARG PACKAGE="ajleal/guacamole"
+ARG VERSION="1.5.5"
 ARG POSTGRES_HOST_AUTH_METHOD="trust"
 
 LABEL org.opencontainers.image.ref.name="${PACKAGE}" \
@@ -180,7 +180,7 @@ ENV \
   GUACAMOLE_HOME=/app/guacamole \
   CATALINA_HOME=/opt/tomcat \
   PG_MAJOR=13 \
-  TOMCAT_VER=9.0.83 \
+  TOMCAT_VER=9.0.89 \
   PGDATA=/config/postgres \
   POSTGRES_USER=guacamole \
   POSTGRES_DB=guacamole_db \
