@@ -9,40 +9,39 @@ ENV \
 
 # Install build dependencies
 RUN apk add --no-cache                \
-        alsa-lib-dev                  \
-        alsa-tools-dev                \
-        autoconf                      \
-        automake                      \
-        build-base                    \
-        cairo-dev                     \
-        cmake                         \
-        cups-dev                      \
-        faac-dev                      \
-        faad2-dev                     \
-        ffmpeg4-dev                   \
-        git                           \
-        grep                          \
-        gsm-dev                       \
-        gstreamer-dev                 \
-        libjpeg-turbo-dev             \
-        libpng-dev                    \
-        libtool                       \
-        libusb-dev                    \
-        libwebp-dev                   \
-        libxkbfile-dev                \
-        make                          \
-        openh264-dev                  \
-        openssl-dev                   \
-        pango-dev                     \
-        pcsc-lite-dev                 \
-        pulseaudio-dev                \
-        util-linux-dev
-
+  alsa-lib-dev                  \
+  alsa-tools-dev                \
+  autoconf                      \
+  automake                      \
+  build-base                    \
+  cairo-dev                     \
+  cmake                         \
+  cups-dev                      \
+  faac-dev                      \
+  faad2-dev                     \
+  ffmpeg4-dev                   \
+  git                           \
+  grep                          \
+  gsm-dev                       \
+  gstreamer-dev                 \
+  libjpeg-turbo-dev             \
+  libpng-dev                    \
+  libtool                       \
+  libusb-dev                    \
+  libwebp-dev                   \
+  libxkbfile-dev                \
+  make                          \
+  openh264-dev                  \
+  openssl-dev                   \
+  pango-dev                     \
+  pcsc-lite-dev                 \
+  pulseaudio-dev                \
+  util-linux-dev
 
 # Copy source to container for sake of build
 ARG BUILD_DIR=/tmp/guacamole-server
 RUN cd /tmp && \
-git clone --branch=${GUAC_VER} https://github.com/apache/guacamole-server.git guacamole-server
+  git clone --branch=${GUAC_VER} https://github.com/apache/guacamole-server.git guacamole-server
 
 # replace libwebsockets repo (original repo failed many times)
 RUN sed -i 's#https://libwebsockets.org/repo/libwebsockets#https://github.com/warmcat/libwebsockets#g' ${BUILD_DIR}/src/guacd-docker/bin/build-all.sh
@@ -73,82 +72,82 @@ ARG WITH_LIBWEBSOCKETS='v\d+(\.\d+)+'
 #
 
 ARG FREERDP_OPTS_COMMON="\
-    -DBUILTIN_CHANNELS=OFF \
-    -DCHANNEL_URBDRC=OFF \
-    -DWITH_ALSA=ON \
-    -DWITH_CAIRO=ON \
-    -DWITH_CHANNELS=ON \
-    -DWITH_CLIENT=ON \
-    -DWITH_CUPS=ON \
-    -DWITH_DIRECTFB=OFF \
-    -DWITH_FAAC=ON \
-    -DWITH_FAAD2=ON \
-    -DWITH_FFMPEG=ON \
-    -DWITH_GSM=ON \
-    -DWITH_GSSAPI=OFF \
-    -DWITH_IPP=OFF \
-    -DWITH_JPEG=ON \
-    -DWITH_LIBSYSTEMD=OFF \
-    -DWITH_MANPAGES=OFF \
-    -DWITH_OPENH264=N \
-    -DWITH_OPENSSL=ON \
-    -DWITH_OSS=OFF \
-    -DWITH_PCSC=ON \
-    -DWITH_PULSE=ON \
-    -DWITH_SERVER=OFF \
-    -DWITH_SERVER_INTERFACE=OFF \
-    -DWITH_SHADOW_MAC=OFF \
-    -DWITH_SHADOW_X11=OFF \
-    -DWITH_WAYLAND=OFF \
-    -DWITH_X11=OFF \
-    -DWITH_X264=OFF \
-    -DWITH_XCURSOR=ON \
-    -DWITH_XEXT=ON \
-    -DWITH_XI=OFF \
-    -DWITH_XINERAMA=OFF \
-    -DWITH_XKBFILE=ON \
-    -DWITH_XRENDER=OFF \
-    -DWITH_XTEST=OFF \
-    -DWITH_XV=OFF \
-    -DWITH_ZLIB=ON"
+  -DBUILTIN_CHANNELS=OFF \
+  -DCHANNEL_URBDRC=OFF \
+  -DWITH_ALSA=ON \
+  -DWITH_CAIRO=ON \
+  -DWITH_CHANNELS=ON \
+  -DWITH_CLIENT=ON \
+  -DWITH_CUPS=ON \
+  -DWITH_DIRECTFB=OFF \
+  -DWITH_FAAC=ON \
+  -DWITH_FAAD2=ON \
+  -DWITH_FFMPEG=ON \
+  -DWITH_GSM=ON \
+  -DWITH_GSSAPI=OFF \
+  -DWITH_IPP=OFF \
+  -DWITH_JPEG=ON \
+  -DWITH_LIBSYSTEMD=OFF \
+  -DWITH_MANPAGES=OFF \
+  -DWITH_OPENH264=N \
+  -DWITH_OPENSSL=ON \
+  -DWITH_OSS=OFF \
+  -DWITH_PCSC=ON \
+  -DWITH_PULSE=ON \
+  -DWITH_SERVER=OFF \
+  -DWITH_SERVER_INTERFACE=OFF \
+  -DWITH_SHADOW_MAC=OFF \
+  -DWITH_SHADOW_X11=OFF \
+  -DWITH_WAYLAND=OFF \
+  -DWITH_X11=OFF \
+  -DWITH_X264=OFF \
+  -DWITH_XCURSOR=ON \
+  -DWITH_XEXT=ON \
+  -DWITH_XI=OFF \
+  -DWITH_XINERAMA=OFF \
+  -DWITH_XKBFILE=ON \
+  -DWITH_XRENDER=OFF \
+  -DWITH_XTEST=OFF \
+  -DWITH_XV=OFF \
+  -DWITH_ZLIB=ON"
 
 ARG GUACAMOLE_SERVER_OPTS="\
-    --disable-guaclog"
+  --disable-guaclog"
 
 ARG LIBSSH2_OPTS="\
-    -DBUILD_EXAMPLES=OFF \
-    -DBUILD_SHARED_LIBS=ON"
+  -DBUILD_EXAMPLES=OFF \
+  -DBUILD_SHARED_LIBS=ON"
 
 ARG LIBTELNET_OPTS="\
-    --disable-static \
-    --disable-util"
+  --disable-static \
+  --disable-util"
 
 ARG LIBVNCCLIENT_OPTS=""
 
 ARG LIBWEBSOCKETS_OPTS="\
-    -DDISABLE_WERROR=ON \
-    -DLWS_WITHOUT_SERVER=ON \
-    -DLWS_WITHOUT_TESTAPPS=ON \
-    -DLWS_WITHOUT_TEST_CLIENT=ON \
-    -DLWS_WITHOUT_TEST_PING=ON \
-    -DLWS_WITHOUT_TEST_SERVER=ON \
-    -DLWS_WITHOUT_TEST_SERVER_EXTPOLL=ON \
-    -DLWS_WITH_STATIC=OFF"
+  -DDISABLE_WERROR=ON \
+  -DLWS_WITHOUT_SERVER=ON \
+  -DLWS_WITHOUT_TESTAPPS=ON \
+  -DLWS_WITHOUT_TEST_CLIENT=ON \
+  -DLWS_WITHOUT_TEST_PING=ON \
+  -DLWS_WITHOUT_TEST_SERVER=ON \
+  -DLWS_WITHOUT_TEST_SERVER_EXTPOLL=ON \
+  -DLWS_WITH_STATIC=OFF"
 
 # Build guacamole-server and its core protocol library dependencies
 RUN echo "$TARGETPLATFORM"
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; \
-    then FREERDP_OPTS="${FREERDP_OPTS_COMMON}    -DWITH_SSE2=ON" && echo "SSE2 active"; \
-    else FREERDP_OPTS="${FREERDP_OPTS_COMMON}    -DWITH_SSE2=OFF" && echo "SSE2 disabled"; \
-    fi && \
-${BUILD_DIR}/src/guacd-docker/bin/build-all.sh
+  then FREERDP_OPTS="${FREERDP_OPTS_COMMON}    -DWITH_SSE2=ON" && echo "SSE2 active"; \
+  else FREERDP_OPTS="${FREERDP_OPTS_COMMON}    -DWITH_SSE2=OFF" && echo "SSE2 disabled"; \
+  fi && \
+  ${BUILD_DIR}/src/guacd-docker/bin/build-all.sh
 
 # Record the packages of all runtime library dependencies
 RUN ${BUILD_DIR}/src/guacd-docker/bin/list-dependencies.sh \
-        ${PREFIX_DIR}/sbin/guacd               \
-        ${PREFIX_DIR}/lib/libguac-client-*.so  \
-        ${PREFIX_DIR}/lib/freerdp2/*guac*.so   \
-        > ${PREFIX_DIR}/DEPENDENCIES
+  ${PREFIX_DIR}/sbin/guacd               \
+  ${PREFIX_DIR}/lib/libguac-client-*.so  \
+  ${PREFIX_DIR}/lib/freerdp2/*guac*.so   \
+  > ${PREFIX_DIR}/DEPENDENCIES
 
 
 # Use same Alpine version as the base for the runtime image
@@ -157,7 +156,7 @@ FROM alpine:${ALPINE_BASE_IMAGE}
 ARG PREFIX_DIR=/opt/guacamole
 
 ARG APPLICATION="guacamole"
-ARG BUILD_RFC3339="2024-06-18"
+ARG BUILD_RFC3339="2024-07-16"
 ARG REVISION="local"
 ARG DESCRIPTION="Fully Packaged and Multi-Arch Guacamole container"
 ARG PACKAGE="ajleal/guacamole"
@@ -166,7 +165,7 @@ ARG POSTGRES_HOST_AUTH_METHOD="trust"
 
 LABEL org.opencontainers.image.ref.name="${PACKAGE}" \
   org.opencontainers.image.created=$BUILD_RFC3339 \
-  org.opencontainers.image.authors="MaxWaldorf" \
+  org.opencontainers.image.authors="bluPhy" \
   org.opencontainers.image.documentation="https://github.com/${PACKAGE}/README.md" \
   org.opencontainers.image.description="${DESCRIPTION}" \
   org.opencontainers.image.licenses="GPLv3" \
@@ -179,7 +178,7 @@ ENV \
   GUAC_VER=${VERSION} \
   GUACAMOLE_HOME=/app/guacamole \
   CATALINA_HOME=/opt/tomcat \
-  PG_MAJOR=13 \
+  PG_MAJOR=15 \
   TOMCAT_VER=9.0.89 \
   PGDATA=/config/postgres \
   POSTGRES_USER=guacamole \
@@ -203,21 +202,21 @@ WORKDIR ${GUACAMOLE_HOME}
 
 # Bring runtime environment up to date and install runtime dependencies
 RUN apk add --no-cache                \
-        bash                          \
-        bash-completion               \
-        ca-certificates               \
-        curl                          \
-        ghostscript                   \
-        netcat-openbsd                \
-        openjdk11-jdk                 \
-        postgresql15                  \
-        shadow                        \
-        terminus-font                 \
-        ttf-dejavu                    \
-        ttf-liberation                \
-        tzdata                        \
-        util-linux-login && \
-    xargs -t apk add --no-cache < ${PREFIX_DIR}/DEPENDENCIES
+  bash                          \
+  bash-completion               \
+  ca-certificates               \
+  curl                          \
+  ghostscript                   \
+  netcat-openbsd                \
+  openjdk11-jdk                 \
+  postgresql15                  \
+  shadow                        \
+  terminus-font                 \
+  ttf-dejavu                    \
+  ttf-liberation                \
+  tzdata                        \
+  util-linux-login && \
+  xargs -t apk add --no-cache < ${PREFIX_DIR}/DEPENDENCIES
 
 RUN apk add --no-cache -X https://dl-cdn.alpinelinux.org/alpine/edge/testing gosu 
 
@@ -228,19 +227,19 @@ RUN tar xvzf /tmp/apache-tomcat-${TOMCAT_VER}.tar.gz --strip-components 1 --dire
 RUN chmod +x /opt/tomcat/bin/*.sh
 
 RUN groupadd tomcat && \
-useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+  useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
 
 RUN chgrp -R tomcat /opt/tomcat && \
-chmod -R g+r /opt/tomcat/conf && \
-chmod g+x /opt/tomcat/conf && \
-chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp/ /opt/tomcat/logs/ && \
-chmod 777 -R /opt/tomcat/logs/
+  chmod -R g+r /opt/tomcat/conf && \
+  chmod g+x /opt/tomcat/conf && \
+  chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp/ /opt/tomcat/logs/ && \
+  chmod 777 -R /opt/tomcat/logs/
 
 # Install guacamole-client and postgres auth adapter
 RUN set -x \
   && rm -rf ${CATALINA_HOME}/webapps/ROOT \
   && curl -SLo ${CATALINA_HOME}/webapps/ROOT.war "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-${GUAC_VER}.war" \
-  && curl -SLo ${GUACAMOLE_HOME}/lib/postgresql-42.6.1.jar "https://jdbc.postgresql.org/download/postgresql-42.6.1.jar" \
+  && curl -SLo ${GUACAMOLE_HOME}/lib/postgresql-42.7.3.jar "https://jdbc.postgresql.org/download/postgresql-42.7.3.jar" \
   && curl -SLo ${GUACAMOLE_HOME}/guacamole-auth-jdbc-${GUAC_VER}.tar.gz "http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VER}/binary/guacamole-auth-jdbc-${GUAC_VER}.tar.gz" \
   && tar -xzf ${GUACAMOLE_HOME}/guacamole-auth-jdbc-${GUAC_VER}.tar.gz \
   && cp -R ${GUACAMOLE_HOME}/guacamole-auth-jdbc-${GUAC_VER}/postgresql/guacamole-auth-jdbc-postgresql-${GUAC_VER}.jar ${GUACAMOLE_HOME}/extensions/ \
