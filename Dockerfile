@@ -156,7 +156,7 @@ FROM alpine:${ALPINE_BASE_IMAGE}
 ARG PREFIX_DIR=/opt/guacamole
 
 ARG APPLICATION="guacamole"
-ARG BUILD_RFC3339="2024-07-16"
+ARG BUILD_RFC3339="2024-07-31"
 ARG REVISION="local"
 ARG DESCRIPTION="Fully Packaged and Multi-Arch Guacamole container"
 ARG PACKAGE="ajleal/guacamole"
@@ -201,7 +201,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 WORKDIR ${GUACAMOLE_HOME}
 
 # Bring runtime environment up to date and install runtime dependencies
-RUN apk add --no-cache                \
+RUN apk add --no-cache          \
   bash                          \
   bash-completion               \
   ca-certificates               \
@@ -226,8 +226,7 @@ ADD https://dlcdn.apache.org/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${
 RUN tar xvzf /tmp/apache-tomcat-${TOMCAT_VER}.tar.gz --strip-components 1 --directory /opt/tomcat
 RUN chmod +x /opt/tomcat/bin/*.sh
 
-RUN groupadd tomcat && \
-  useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+RUN groupadd tomcat && useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
 
 RUN chgrp -R tomcat /opt/tomcat && \
   chmod -R g+r /opt/tomcat/conf && \
